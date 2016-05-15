@@ -8,13 +8,11 @@ Stable tag: 0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Redirect a chosen slug, "latest" by default, to, well, the latest post.
+Redirect a chosen slug, "latest" by default, to, well, the most-recently published post.
 
 == Description ==
 
-Once activated, a given slug will redirect to whatever is the most recently-published post on the site. By default, the slug is `latest`.
-
-`latest`, the default slug, can be changed from the Permalinks settings screen.
+Once activated, a given slug will redirect to whatever is the most recently-published post on the site. By default, the slug is `latest`, but it can be changed from the Permalinks settings screen.
 
 == Installation ==
 
