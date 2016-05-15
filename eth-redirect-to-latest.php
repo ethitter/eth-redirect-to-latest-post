@@ -67,7 +67,6 @@ class ETH_Redirect_To_Latest_Post {
 		add_action( 'parse_request', array( $this, 'action_parse_request' ) );
 
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
-		add_filter( 'whitelist_options', array( $this, 'filter_whitelist_options' ), 999 );
 	}
 
 	/**
