@@ -61,7 +61,38 @@ class ETH_Redirect_To_Latest_Post {
 	/**
 	 * Register plugin's setup action
 	 */
-	private function __construct() {}
+	private function __construct() {
+		add_action( 'parse_request', array( $this, 'action_parse_request' ) );
+	}
+
+	/**
+	 * Redirect to the latest post any requests made to plugin's slug
+	 */
+	public function action_parse_request( $r ) {
+		if ( isset( $r->query_vars['pagename'] ) && $this->slug === $r->query_vars['pagename'] ) {
+			$latest = get_posts( array(
+				'posts_per_page'   => 1,
+				'post_type'        => 'post',
+				'orderby'          => 'date',
+				'order'            => 'desc',
+				'suppress_filters' => false,
+				'no_found_rows'    => true,
+			) );
+
+			if ( is_array( $latest ) && ! empty( $latest ) ) {
+				$latest = array_shift( $latest );
+
+				$dest = get_permalink( $latest->ID );
+
+				if ( ! $dest ) {
+					$dest = user_trailingslashit( home_url() );
+				}
+
+				wp_redirect( $dest, 302 ); // Not validating in case other plugins redirect elsewhere
+				exit;
+			}
+		}
+	}
 }
 
 /**
