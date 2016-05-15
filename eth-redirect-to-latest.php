@@ -4,7 +4,7 @@ Plugin Name: ETH Redirect to Latest Post
 Plugin URI: https://ethitter.com/plugins/
 Description: Redirect a chosen slug to the whatever is currently the latest post
 Author: Erick Hitter
-Version: 0.1
+Version: 0.2
 Author URI: https://ethitter.com/
 Text Domain: eth_redirect_to_latest_post
 Domain Path: /languages/
@@ -55,14 +55,36 @@ class ETH_Redirect_To_Latest_Post {
 	/**
 	 * Class properties
 	 */
-	private $name = 'ETH Redirect to Latest Post';
-	private $slug = 'latest';
+	private $plugin_option_name = 'eth-redirect-to-latest';
+	private $slug               = '';
+	private $default_slug       = '';
 
 	/**
 	 * Register plugin's setup action
 	 */
 	private function __construct() {
+		add_action( 'init', array( $this, 'action_init' ) );
 		add_action( 'parse_request', array( $this, 'action_parse_request' ) );
+
+		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
+		add_filter( 'whitelist_options', array( $this, 'filter_whitelist_options' ), 999 );
+	}
+
+	/**
+	 * Translate plugin slug
+	 */
+	public function action_init() {
+		$this->default_slug = __( 'latest', 'eth_redirect_to_latest_post' );
+
+		$_slug = get_option( $this->plugin_option_name, $this->default_slug );
+
+		if ( is_string( $_slug ) && ! empty( $_slug ) ) {
+			$this->slug = $_slug;
+		}
+
+		if ( empty( $this->slug ) ) {
+			$this->slug = $this->default_slug;
+		}
 	}
 
 	/**
@@ -92,6 +114,51 @@ class ETH_Redirect_To_Latest_Post {
 				exit;
 			}
 		}
+	}
+
+	/**
+	 * ADMIN OPTIONS
+	 */
+
+	/**
+	 * Save plugin settings and register settings field
+	 *
+	 * Permalinks screen is a snowflake, hence the custom saving handler
+	 */
+	public function action_admin_init() {
+		// Make sure user has necessary permissions first
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		// Save custom option, permalinks screen is a snowflake and doesn't fully use the Settings API
+		global $pagenow;
+
+		if ( 'options-permalink.php' === $pagenow && isset( $_POST[ $this->plugin_option_name ] ) ) {
+			check_admin_referer( 'update-permalink' );
+
+			$_slug = sanitize_text_field( $_POST[ $this->plugin_option_name ] );
+
+			if ( empty( $_slug ) ) {
+				$_slug = $this->default_slug;
+			}
+
+			update_option( $this->plugin_option_name, $_slug );
+		}
+
+		// Add custom input field to permalinks screen
+		add_settings_field( $this->plugin_option_name, __( '&quot;Latest post&quot; slug', 'eth_redirect_to_latest_post' ), array( $this, 'settings_field' ), 'permalink', 'optional' );
+	}
+
+	/**
+	 * Render settings field
+	 */
+	public function settings_field() {
+		?>
+		<input type="text" name="<?php echo esc_attr( $this->plugin_option_name ); ?>" value="<?php echo esc_attr( $this->slug ); ?>" class="regular-text" />
+
+		<p class="description"><?php printf( __( 'Set the slug that will redirect to the latest published post. The default value is %s.', 'eth_redirect_to_latest_post' ), '<code style="font-style: normal;">' . $this->default_slug . '</code>' ); ?></p>
+		<?php
 	}
 }
 
