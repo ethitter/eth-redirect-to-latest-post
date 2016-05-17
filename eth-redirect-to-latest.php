@@ -4,7 +4,7 @@ Plugin Name: ETH Redirect to Latest Post
 Plugin URI: https://ethitter.com/plugins/
 Description: Redirect a chosen slug to the whatever is currently the latest post
 Author: Erick Hitter
-Version: 0.2
+Version: 0.2.1
 Author URI: https://ethitter.com/
 Text Domain: eth_redirect_to_latest_post
 Domain Path: /languages/

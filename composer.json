@@ -1,5 +1,5 @@
 {
-  "name"        : "ethitter/eth-redirect-to-latest",
+  "name"        : "ethitter/eth-redirect-to-latest-post",
   "description" : "Redirect a chosen slug, \"latest\" by default, to, well, the most-recently published post.",
   "homepage"    : "https://ethitter.com/",
   "type"        : "wordpress-plugin",
