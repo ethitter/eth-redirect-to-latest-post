@@ -1,0 +1,17 @@
+{
+  "name"        : "ethitter/eth-redirect-to-latest",
+  "description" : "Redirect a chosen slug, \"latest\" by default, to, well, the most-recently published post.",
+  "homepage"    : "https://ethitter.com/",
+  "type"        : "wordpress-plugin",
+  "license"     : "GPL-2.0+",
+  "authors"     : [
+    {
+      "name"     : "Erick Hitter",
+      "email"    : "wp@ethitter.com",
+      "homepage" : "https://ethitter.com/"
+    }
+  ],
+  "require" : {
+    "composer/installers" : "~1.0"
+  }
+}
