@@ -3,8 +3,8 @@ Contributors: ethitter
 Donate link: https://ethitter.com/donate/
 Tags: latest, latest post, redirect, redirect latest, redirect post
 Requires at least: 4.5
-Tested up to: 4.6
-Stable tag: 0.2.1
+Tested up to: 4.7
+Stable tag: 0.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ Once activated, a given slug will redirect to whatever is the most recently-publ
 1. If desired, change the slug from the 'Permalinks' screen in WordPress.
 
 == Changelog ==
+
+= 0.2.2 =
+* Handle sites using slug-only permalinks
 
 = 0.2.1 =
 * Correct Composer path error

@@ -4,7 +4,7 @@ Plugin Name: ETH Redirect to Latest Post
 Plugin URI: https://ethitter.com/plugins/
 Description: Redirect a chosen slug to the whatever is currently the latest post
 Author: Erick Hitter
-Version: 0.2.1
+Version: 0.2.2
 Author URI: https://ethitter.com/
 Text Domain: eth_redirect_to_latest_post
 Domain Path: /languages/
@@ -90,7 +90,18 @@ class ETH_Redirect_To_Latest_Post {
 	 * Redirect to the latest post any requests made to plugin's slug
 	 */
 	public function action_parse_request( $r ) {
+		$should_intercept = false;
+
+		// Check if request is for our slug
+		// The first condition catches permastructs that are more than just post slug, whereas the second catches for slug-only permalinks
 		if ( isset( $r->query_vars['pagename'] ) && $this->slug === $r->query_vars['pagename'] ) {
+			$should_intercept = true;
+		} elseif ( isset( $r->query_vars['name'] ) && $this->slug === $r->query_vars['name'] ) {
+			$should_intercept = true;
+		}
+
+		// Handle redirection
+		if ( $should_intercept ) {
 			$latest = get_posts( array(
 				'posts_per_page'   => 1,
 				'post_type'        => 'post',
