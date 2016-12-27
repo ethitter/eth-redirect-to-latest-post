@@ -90,6 +90,12 @@ class ETH_Redirect_To_Latest_Post {
 	 * Redirect to the latest post any requests made to plugin's slug
 	 */
 	public function action_parse_request( $r ) {
+		// Nothing to do if permalinks aren't enabled
+		if ( ! $r->did_permalink ) {
+			return;
+		}
+
+		// By default, there's also nothing to do
 		$should_intercept = false;
 
 		// Check if request is for our slug
