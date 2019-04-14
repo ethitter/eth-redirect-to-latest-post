@@ -34,6 +34,7 @@ PHPunit:PHP7.2:MySQL:
     - find . -type "f" -iname "*.php" | xargs -L "1" php -l
     - phpcs -n
     - phpunit
+  allow_failure: true
 
 PHPunit:PHP7.3:MySQL:
   stage: test
@@ -44,6 +45,7 @@ PHPunit:PHP7.3:MySQL:
     - find . -type "f" -iname "*.php" | xargs -L "1" php -l
     - phpcs -n
     - phpunit
+  allow_failure: true
 
 PluginSVN:
   stage: deploy
