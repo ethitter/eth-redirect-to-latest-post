@@ -115,49 +115,90 @@ class ETH_Redirect_To_Latest_Post {
 			return;
 		}
 
-		// By default, there's also nothing to do.
-		$should_intercept = false;
+		$redirect = $this->get_redirect_for_request( $r );
 
+		if ( null === $redirect ) {
+			return;
+		}
+
+		header( 'x-redirect: eth-redirect-to-latest-post' );
+
+		// Not validating in case other plugins redirect elsewhere.
+		// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
+		wp_redirect( $redirect->destination, $redirect->status_code );
+		exit;
+	}
+
+	/**
+	 * Parse the request to determine its redirect, if any.
+	 *
+	 * @param WP $r WP object.
+	 * @return \stdClass|null
+	 */
+	public function get_redirect_for_request( $r ) {
 		/**
 		 * Check if request is for our slug.
 		 *
-		 * The first condition catches permastructs that are more than just
-		 * post slug, whereas the second catches for slug-only permalinks.
+		 * The first condition catches hierarchical permastructs, while
+		 * the second catches non-hierarchical permastructs.
 		 */
 		if ( isset( $r->query_vars['pagename'] ) && $this->slug === $r->query_vars['pagename'] ) {
 			$should_intercept = true;
 		} elseif ( isset( $r->query_vars['name'] ) && $this->slug === $r->query_vars['name'] ) {
 			$should_intercept = true;
+		} else {
+			$should_intercept = false;
 		}
 
-		// Handle redirection.
-		if ( $should_intercept ) {
-			$latest = get_posts(
-				array(
-					'posts_per_page'   => 1,
-					'post_type'        => 'post',
-					'orderby'          => 'date',
-					'order'            => 'desc',
-					'suppress_filters' => false,
-					'no_found_rows'    => true,
-				)
-			);
-
-			if ( is_array( $latest ) && ! empty( $latest ) ) {
-				$latest = array_shift( $latest );
-
-				$dest = get_permalink( $latest->ID );
-
-				if ( ! $dest ) {
-					$dest = user_trailingslashit( home_url() );
-				}
-
-				// Not validating in case other plugins redirect elsewhere.
-				// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
-				wp_redirect( $dest, 302 );
-				exit;
-			}
+		if ( ! $should_intercept ) {
+			return null;
 		}
+
+		$redirect = [
+			'destination' => '',
+			'status_code' => 302,
+		];
+
+		$query_args = array(
+			'posts_per_page'   => 1,
+			'post_type'        => 'post',
+			'orderby'          => 'date',
+			'order'            => 'desc',
+			'suppress_filters' => false,
+			'no_found_rows'    => true,
+		);
+
+		/**
+		 * Filters the query arguments that determine
+		 * the latest post.
+		 *
+		 * @param array $query_args WP_Query arguments.
+		 * @param WP    $r          WP Object.
+		 * @return array
+		 */
+		$query_args = apply_filters( 'eth_redirect_to_latest_post_query_args', $query_args, $r );
+
+		$latest = get_posts( $query_args );
+		if ( is_array( $latest ) && ! empty( $latest ) ) {
+			$latest                  = array_shift( $latest );
+			$redirect['destination'] = get_permalink( $latest->ID );
+		}
+
+		if ( empty( $redirect['destination'] ) ) {
+			$redirect['destination'] = user_trailingslashit( home_url() );
+		}
+
+		/**
+		 * Filters the redirection data.
+		 *
+		 * @param array         $redirect Array of redirect destination and status code.
+		 * @param array|WP_Post $latest   Post object or empty array if no posts found.
+		 * @param WP            $r        WP object.
+		 * @return string
+		 */
+		$redirect = apply_filters( 'eth_redirect_to_latest_post_redirection', $redirect, $latest, $r );
+
+		return (object) $redirect;
 	}
 
 	/**
