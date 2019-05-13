@@ -154,10 +154,10 @@ class ETH_Redirect_To_Latest_Post {
 			return null;
 		}
 
-		$redirect = [
+		$redirect = array(
 			'destination' => '',
 			'status_code' => 302,
-		];
+		);
 
 		$query_args = array(
 			'posts_per_page'   => 1,
