@@ -194,9 +194,13 @@ class ETH_Redirect_To_Latest_Post {
 		 * @param array         $redirect Array of redirect destination and status code.
 		 * @param array|WP_Post $latest   Post object or empty array if no posts found.
 		 * @param WP            $r        WP object.
-		 * @return string
+		 * @return array|null
 		 */
 		$redirect = apply_filters( 'eth_redirect_to_latest_post_redirection', $redirect, $latest, $r );
+
+		if ( null === $redirect ) {
+			return null;
+		}
 
 		return (object) $redirect;
 	}
