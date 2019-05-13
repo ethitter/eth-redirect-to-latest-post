@@ -124,11 +124,11 @@ class PluginTest extends WP_UnitTestCase {
 		$redirect = ETH_Redirect_To_Latest_Post::get_instance()->get_redirect_for_request( $fake_request );
 
 		$object_by_slug = get_posts(
-			[
+			array(
 				'posts_per_page' => 1,
 				'post_status'    => 'any',
 				'name'           => $fake_request->query_vars['name'],
-			]
+			)
 		);
 
 		$this->assertCount(
@@ -159,12 +159,12 @@ class PluginTest extends WP_UnitTestCase {
 		$redirect = ETH_Redirect_To_Latest_Post::get_instance()->get_redirect_for_request( $fake_request );
 
 		$object_by_slug = get_posts(
-			[
+			array(
 				'posts_per_page' => 1,
 				'post_status'    => 'any',
 				'post_type'      => 'page',
 				'pagename'       => $fake_request->query_vars['pagename'],
-			]
+			)
 		);
 
 		$this->assertCount(
