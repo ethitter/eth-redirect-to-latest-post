@@ -23,6 +23,9 @@ require_once $_tests_dir . '/includes/functions.php';
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
+	// Plugin requires pretty permalinks to function.
+	_set_default_permalink_structure_for_tests();
+
 	require dirname( dirname( __FILE__ ) ) . '/eth-redirect-to-latest.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );

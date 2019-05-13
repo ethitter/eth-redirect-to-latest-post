@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the ETH Redirect to Latest Post package.
 msgid ""
 msgstr ""
-"Project-Id-Version: ETH Redirect to Latest Post 0.2.2\n"
+"Project-Id-Version: ETH Redirect to Latest Post 0.3\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/eth-redirect-to-latest\n"
-"POT-Creation-Date: 2019-04-14 03:43:53+00:00\n"
+"POT-Creation-Date: 2019-05-13 01:45:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,19 +25,21 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: eth-redirect-to-latest.php:51 eth-redirect-to-latest.php:52
+#: inc/class-eth-redirect-to-latest-post.php:38
+#: inc/class-eth-redirect-to-latest-post.php:45
 msgid "Cheatin&#8217; uh?"
 msgstr ""
 
-#: eth-redirect-to-latest.php:76
+#: inc/class-eth-redirect-to-latest-post.php:94
 msgid "latest"
 msgstr ""
 
-#: eth-redirect-to-latest.php:166
+#: inc/class-eth-redirect-to-latest-post.php:239
 msgid "&quot;Latest post&quot; slug"
 msgstr ""
 
-#: eth-redirect-to-latest.php:176
+#: inc/class-eth-redirect-to-latest-post.php:253
+#. translators: 1. Default slug, wrapped in a <code> tag.
 msgid ""
 "Set the slug that will redirect to the latest published post. The default "
 "value is %s."
