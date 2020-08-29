@@ -17,6 +17,8 @@ before_script:
   - |
     if [[ $(php -v) =~ "PHP 7." ]]; then
       composer global require "phpunit/phpunit=6.1.*"
+    elif [[ $(php -v) =~ "PHP 5.6" ]]; then
+      composer global require "phpunit/phpunit=5.4.*"
     else
       composer global require "phpunit/phpunit=4.8.*"
     fi
