@@ -1,5 +1,2 @@
 include:
-  - remote: https://git.ethitter.com/gitlab/ci/wordpress/-/raw/main/plugins/variables.yml
-  - remote: https://git.ethitter.com/gitlab/ci/wordpress/-/raw/main/plugins/cache.yml
-  - remote: https://git.ethitter.com/gitlab/ci/wordpress/-/raw/main/plugins/before-script.yml
-  - remote: https://git.ethitter.com/gitlab/ci/wordpress/-/raw/main/plugins/matrix.yml
+  - remote: https://git.ethitter.com/gitlab/ci/wordpress/-/raw/main/plugins/default.yml
