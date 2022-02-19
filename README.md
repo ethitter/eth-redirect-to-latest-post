@@ -1,12 +1,12 @@
 # ETH Redirect to Latest Post #
-**Contributors:** ethitter  
-**Donate link:** https://ethitter.com/donate/  
-**Tags:** latest, latest post, redirect, redirect latest, redirect post  
-**Requires at least:** 4.5  
-**Tested up to:** 5.7  
-**Stable tag:** 0.3  
-**License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+**Contributors:** ethitter
+**Donate link:** https://ethitter.com/donate/
+**Tags:** latest, latest post, redirect, redirect latest, redirect post
+**Requires at least:** 4.5
+**Tested up to:** 5.9
+**Stable tag:** 0.3
+**License:** GPLv2 or later
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 Redirect a chosen slug, "latest" by default, to, well, the most-recently-published post.
 
