@@ -24,8 +24,8 @@ class PluginTest extends WP_UnitTestCase {
 	 * slug used for redirection so that we can confirm that
 	 * redirection takes priority.
 	 */
-	public function setUp() {
-		parent::setUp();
+	public function set_up() {
+		parent::set_up();
 
 		$this->factory->post->create_many(
 			10,
