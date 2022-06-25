@@ -10,9 +10,9 @@
  * Plugin URI: https://ethitter.com/plugins/
  * Description: Redirect a chosen slug to the whatever is currently the latest post
  * Author: Erick Hitter
- * Version: 0.3
+ * Version: 0.3.1
  * Author URI: https://ethitter.com/
- * Text Domain: eth_redirect_to_latest_post
+ * Text Domain: eth-redirect-to-latest-post
  * Domain Path: /languages/
  *
  * This program is free software; you can redistribute it and/or modify

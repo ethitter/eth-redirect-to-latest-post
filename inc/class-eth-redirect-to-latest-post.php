@@ -35,14 +35,14 @@ class ETH_Redirect_To_Latest_Post {
 	 * Dummy magic method.
 	 */
 	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?', 'eth_redirect_to_latest_post' ), '0.1' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?', 'eth-redirect-to-latest-post' ), '0.1' );
 	}
 
 	/**
 	 * Dummy magic method.
 	 */
 	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?', 'eth_redirect_to_latest_post' ), '0.1' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?', 'eth-redirect-to-latest-post' ), '0.1' );
 	}
 
 	/**
@@ -81,6 +81,7 @@ class ETH_Redirect_To_Latest_Post {
 	 * Register plugin's setup action.
 	 */
 	private function __construct() {
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'init', array( $this, 'action_init' ) );
 		add_action( 'parse_request', array( $this, 'action_parse_request' ) );
 
@@ -88,10 +89,23 @@ class ETH_Redirect_To_Latest_Post {
 	}
 
 	/**
+	 * Load plugin translations.
+	 *
+	 * @return void
+	 */
+	public function load_textdomain() {
+		load_plugin_textdomain(
+			'eth-redirect-to-latest-post',
+			false,
+			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+		);
+	}
+
+	/**
 	 * Translate plugin slug.
 	 */
 	public function action_init() {
-		$this->default_slug = __( 'latest', 'eth_redirect_to_latest_post' );
+		$this->default_slug = __( 'latest', 'eth-redirect-to-latest-post' );
 
 		$_slug = get_option( $this->plugin_option_name, $this->default_slug );
 
@@ -236,7 +250,7 @@ class ETH_Redirect_To_Latest_Post {
 		}
 
 		// Add custom input field to permalinks screen.
-		add_settings_field( $this->plugin_option_name, __( '&quot;Latest post&quot; slug', 'eth_redirect_to_latest_post' ), array( $this, 'settings_field' ), 'permalink', 'optional' );
+		add_settings_field( $this->plugin_option_name, __( '&quot;Latest post&quot; slug', 'eth-redirect-to-latest-post' ), array( $this, 'settings_field' ), 'permalink', 'optional' );
 	}
 
 	/**
@@ -252,7 +266,7 @@ class ETH_Redirect_To_Latest_Post {
 				/* translators: 1. Default slug, wrapped in a <code> tag. */
 				esc_html__(
 					'Set the slug that will redirect to the latest published post. The default value is %s.',
-					'eth_redirect_to_latest_post'
+					'eth-redirect-to-latest-post'
 				),
 				'<code style="font-style: normal;">' . esc_html( $this->default_slug ) . '</code>'
 			);
