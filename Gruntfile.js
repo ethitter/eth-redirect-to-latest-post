@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
 
 		addtextdomain: {
 			options: {
-				textdomain: 'eth_redirect_to_latest_post',
+				textdomain: 'eth-redirect-to-latest-post',
 			},
 			update_all_domains: {
 				options: {

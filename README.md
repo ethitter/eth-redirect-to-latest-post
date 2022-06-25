@@ -4,7 +4,7 @@
 **Tags:** latest, latest post, redirect, redirect latest, redirect post  
 **Requires at least:** 4.5  
 **Tested up to:** 6.0  
-**Stable tag:** 0.3  
+**Stable tag:** 0.3.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -28,6 +28,9 @@ Yes, using the `eth_redirect_to_latest_post_query_args` or `eth_redirect_to_late
 
 ## Changelog ##
 
+### 0.3.1 ###
+* Fix translation support.
+
 ### 0.3 ###
 * Introduce filters to make redirection more flexible.
 * Add unit tests and conform to coding standards.
@@ -40,3 +43,8 @@ Yes, using the `eth_redirect_to_latest_post_query_args` or `eth_redirect_to_late
 
 ### 0.2 ###
 * Initial release
+
+## Upgrade Notice ##
+
+### 0.3.1 ###
+Fixes translation support.
