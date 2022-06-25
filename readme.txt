@@ -47,4 +47,4 @@ Yes, using the `eth_redirect_to_latest_post_query_args` or `eth_redirect_to_late
 == Upgrade Notice ==
 
 = 0.3.1 =
-Fix translation support.
+Fixes translation support.
