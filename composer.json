@@ -3,6 +3,7 @@
   "description" : "Redirect a chosen slug, \"latest\" by default, to, well, the most-recently published post.",
   "homepage"    : "https://ethitter.com/",
   "type"        : "wordpress-plugin",
+  "keywords"    : [ "latest", "latest post", "redirect", "redirect latest", "redirect post" ],
   "license"     : "GPL-2.0+",
   "authors"     : [
     {
@@ -12,6 +13,6 @@
     }
   ],
   "require" : {
-    "composer/installers" : "~1.0"
+    "php" : ">=7.2.0"
   }
 }
