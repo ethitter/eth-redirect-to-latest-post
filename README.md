@@ -3,7 +3,7 @@
 **Donate link:** https://ethitter.com/donate/  
 **Tags:** latest, latest post, redirect, redirect latest, redirect post  
 **Requires at least:** 4.5  
-**Tested up to:** 6.0  
+**Tested up to:** 6.8  
 **Stable tag:** 0.3.1  
 **Requires PHP:** 7.2  
 **License:** GPLv2 or later  
